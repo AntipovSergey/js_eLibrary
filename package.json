@@ -1,0 +1,19 @@
+{
+	"name": "e_library",
+	"type": "module",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"build": "rollup -c",
+		"start": "live-server"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@rollup/plugin-node-resolve": "^15.0.1",
+		"eslint": "^8.36.0",
+		"rollup": "^3.19.1",
+		"rollup-plugin-import-css": "^3.2.1"
+	}
+}
