@@ -5,7 +5,7 @@
 	"description": "",
 	"main": "app.js",
 	"scripts": {
-		"build": "rollup -c",
+		"build": "rollup -c --watch",
 		"start": "live-server"
 	},
 	"author": "",
