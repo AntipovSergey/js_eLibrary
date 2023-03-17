@@ -1015,6 +1015,47 @@
 	onChange.target = proxy => (proxy && proxy[TARGET]) || proxy;
 	onChange.unsubscribe = proxy => proxy[UNSUBSCRIBE] || proxy;
 
+	class DivComponent {
+		constructor() {
+			this.el = document.createElement('div');
+		}
+
+		render() {
+			this.el;
+		}
+	}
+
+	class Header extends DivComponent {
+		constructor(appState) {
+			super();
+			this.appState = appState;
+		}
+
+		render() {
+			this.el.innerHTML = '';
+			this.el.classList.add('header');
+			this.el.innerHTML = `
+			<div>
+				<img src='/static/logo.svg' alt='Логотип' />
+			</div>
+			<div class='menu'>
+				<a class='menu__item' href='#'>
+					<img src='/static/search.svg' alt='Поиск'/>
+					<span>Поиск книг</span>
+				</a>
+				<a class='menu__item' href='#'>
+					<img src='/static/favorites.svg' alt='Избранное'/>
+					<span>Избранное</span>
+					<div class='menu__counter'>
+						${this.appState.favorites.length}
+					</div>
+				</a>
+			</div>
+		`;
+			return this.el;
+		}
+	}
+
 	class MainView extends AbstractView {
 		state = {
 			list: [],
@@ -1037,10 +1078,14 @@
 
 		render() {
 			const main = document.createElement('div');
-			main.innerHTML = `Число книг ${this.appState.favorites.length}`;
 			this.app.innerHTML = '';
 			this.app.append(main);
-			this.appState.favorites.push('d');
+			this.renderHeader();
+		}
+
+		renderHeader() {
+			const header = new Header(this.appState).render();
+			this.app.prepend(header);
 		}
 	}
 
